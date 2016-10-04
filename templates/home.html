@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block scripts %}
+  <script>
+    (function ($, window, document) {
+      /* globals window, jQuery, document, console */
+
+      // enable this return statement to disable Ajax submission
+      // return;
+
+      $(document).ready(function () {
+        var myForm = $('#myForm');
+
+
+        myForm.on('submit', function (e) {
+          e.preventDefault();
+          var data = myForm.serialize();
+
+          $.post('/my-ajax-endpoint', data, function (result) {
+            if (result.success) {
+              alert(result.message);
+            } else {
+              alert('Error: ' + result.message);
+            }
+            console.log(result);
+          });
+        })
+      });
+    }(jQuery, window, document))
+  </script>
+{% endblock %}
+
+{% block content %}
+  <h1>Example Form</h1>
+  {% if submitted %}
+    <p>{{ message }}</p>
+  {% endif %}
+
+  <form action="/" id="myForm" method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.name.label }} {{ form.name(size=20) }}
+    <input type="submit" value="Go">
+  </form>
+{% endblock %}
