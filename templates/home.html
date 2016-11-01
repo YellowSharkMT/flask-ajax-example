@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script>
     (function ($, window, document) {
       /* globals window, jQuery, document, console */
@@ -31,7 +32,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Example Form</h1>
+  <h1>Flask/Ajax Example (jQuery)</h1>
   {% if submitted %}
     <p>{{ message }}</p>
   {% endif %}
