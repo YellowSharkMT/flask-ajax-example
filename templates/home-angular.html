@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+  <script src="https://gist.githubusercontent.com/JensRantil/5713606/raw/6353de71cc8e5d5edf17a6649cfac50647bbca40/angular-post-fix.js"></script>
+  <script>
+    window.csrf_token = '{{ csrf_token() }}';
+    angular.module('app', ['http-post-fix'])
+        .controller('ExampleCtrl', function ($log, $scope, $http, $window) {
+          $scope.data = {
+            name: '',
+            csrf_token: $window.csrf_token
+          };
+
+          $scope.submit = function () {
+            $http.post('/my-ajax-endpoint', $scope.data).then(function (result) {
+              if (result.data.success) {
+                alert(result.data.message);
+              } else {
+                alert('Error: ' + result.data.message);
+              }
+              $log.log(result);
+            }, function (err) {
+              alert('Error communicating with server.');
+              $log.log(err);
+            });
+          }
+        });
+  </script>
+{% endblock %}
+
+{% block content %}
+  <h1>Flask/Ajax Example (angular)</h1>
+  {% if submitted %}
+    <p>{{ message }}</p>
+  {% endif %}
+
+  {% raw %}
+  <div ng-app="app">
+    <div ng-controller="ExampleCtrl">
+      <form novalidate="novalidate">
+        <label for="name">Name:</label> <input type="text" id="name" ng-model="data.name">
+        <input type="submit" value="Go" ng-click="submit()">
+      </form>
+    </div>
+  </div>
+  {% endraw %}
+{% endblock %}
