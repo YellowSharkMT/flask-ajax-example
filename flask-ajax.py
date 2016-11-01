@@ -18,7 +18,7 @@ class MyForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', endpoint='home', methods=['GET', 'POST'])
 def home():
     form = MyForm()
     submitted = False
@@ -28,7 +28,7 @@ def home():
         message = 'Success'
     return render_template('home.html', form=form, submitted=submitted, message=message)
 
-@app.route('/angular', methods=['GET', 'POST'])
+@app.route('/angular', endpoint='angular_example', methods=['GET', 'POST'])
 def angular_example():
     form = MyForm()
     submitted = False
