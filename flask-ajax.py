@@ -28,6 +28,16 @@ def home():
         message = 'Success'
     return render_template('home.html', form=form, submitted=submitted, message=message)
 
+@app.route('/angular', methods=['GET', 'POST'])
+def angular_example():
+    form = MyForm()
+    submitted = False
+    message = None
+    if form.validate_on_submit():
+        submitted = True
+        message = 'Success'
+    return render_template('home-angular.html', form=form, submitted=submitted, message=message)
+
 
 @app.route('/my-ajax-endpoint', methods=['POST'])
 def ajax_handler():
