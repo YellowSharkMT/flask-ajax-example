@@ -31,6 +31,7 @@
 
 {% block content %}
   <h1>Flask/Ajax Example (angular)</h1>
+  <p><a href="{{ url_for('home') }}">View the jQuery version</a></p>
   {% if submitted %}
     <p>{{ message }}</p>
   {% endif %}
