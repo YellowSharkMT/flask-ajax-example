@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block scripts %}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
   <!-- the angular http-post-fix module corrects the format for POST-ed data -->
-  <script src="https://gist.githubusercontent.com/JensRantil/5713606/raw/6353de71cc8e5d5edf17a6649cfac50647bbca40/angular-post-fix.js"></script>
+  <script src="{{ url_for('static', filename='js/angular-post-fix.js') }}"></script>
   <script>
     window.csrf_token = '{{ csrf_token() }}';
     angular.module('app', ['http-post-fix'])

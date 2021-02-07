@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from flask_wtf.csrf import CsrfProtect
+from flask_wtf.csrf import CSRFProtect
 
 
 class Config:
@@ -12,7 +12,7 @@ class Config:
 
 app = Flask(__name__)
 app.config.from_object(Config)
-CsrfProtect(app)
+CSRFProtect(app)
 
 
 class MyForm(FlaskForm):
