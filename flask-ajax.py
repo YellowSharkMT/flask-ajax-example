@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, jsonify
+from flask import Flask, render_template, jsonify
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
@@ -7,6 +7,7 @@ from flask_wtf.csrf import CsrfProtect
 
 class Config:
     SECRET_KEY = '111222333444'
+    DEBUG = True
 
 
 app = Flask(__name__)
@@ -28,6 +29,7 @@ def home():
         message = 'Success'
     return render_template('home.html', form=form, submitted=submitted, message=message)
 
+
 @app.route('/angular', endpoint='angular_example', methods=['GET', 'POST'])
 def angular_example():
     form = MyForm()
@@ -43,8 +45,8 @@ def angular_example():
 def ajax_handler():
     form = MyForm()
     if form.validate_on_submit():
-        return jsonify({ 'success': True,
-            'message': 'Success!'})
+        return jsonify({'success': True,
+                        'message': 'Success!'})
 
     return jsonify({'success': False,
                     'message': 'Error - Invalid submission'})
